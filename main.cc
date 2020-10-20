@@ -17,34 +17,34 @@
 
 
 // Самая главная функция!
-int main(int, char**)
-{
-	// Инициализация SDL
-	SDL_Init(SDL_INIT_EVERYTHING);
-
-	try {
-
-		ExampleWindow w;
-
-		w.main_loop();
-
-
-	} catch (const std::exception &e) {
-		// Обработка стандартных исключений
-		std::cerr <<
-				"При выполнении программы возникла "
-				"ошибка:" << std::endl <<
-				e.what() << std::endl;
-		return 1;
-	} catch (...) {
-		// Обработка неизвестных исключений
-		std::cerr <<
-				"При выполнении программы возникла "
-				"неизвестная ошибка." << std::endl;
-		return 1;
-	}
-
-
-	return 0;
-}
+//int main(int, char**)
+//{
+//	// Инициализация SDL
+//	SDL_Init(SDL_INIT_EVERYTHING);
+//
+//	try {
+//
+//		ExampleWindow w;
+//
+//		w.main_loop();
+//
+//
+//	} catch (const std::exception &e) {
+//		// Обработка стандартных исключений
+//		std::cerr <<
+//				"При выполнении программы возникла "
+//				"ошибка:" << std::endl <<
+//				e.what() << std::endl;
+//		return 1;
+//	} catch (...) {
+//		// Обработка неизвестных исключений
+//		std::cerr <<
+//				"При выполнении программы возникла "
+//				"неизвестная ошибка." << std::endl;
+//		return 1;
+//	}
+//
+//
+//	return 0;
+//}
 

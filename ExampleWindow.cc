@@ -12,13 +12,13 @@ static constexpr double Pi = acos(-1.);
 #include "ExampleWindow.h"
 
 ExampleWindow::ExampleWindow(int width, int height)
-: Window(width, height)
+: Window(800, 600)
 {
 	_angle = 0.;
 	_eye_level = 0.;
 }
 
-static const float s_material_red[4]     { 1.f, 0.f, 0.f, 1.f };
+static const float s_material_red[4]     { 1.f, 0.f, 0.f, 1.f };// выделяет память под константу один раз для всех экземпляров классов
 static const float s_material_green[4]   { 0.f, 1.f, 0.f, 1.f };
 static const float s_material_blue[4]    { 0.f, 0.f, 1.f, 1.f };
 static const float s_material_cyan[4]    { 0.f, 1.f, 1.f, 1.f };
@@ -30,9 +30,9 @@ void ExampleWindow::setup()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glClearColor(0.15f, 0.15f, 0.4f, 1.0f);
-	glMatrixMode(GL_PROJECTION);
-	gluPerspective(45., double(width()) / double(height()), 0.01, 20.0);
+	glClearColor(0.15f, 0.15f, 0.4f, 1.0f); // устанавливает цвет
+	glMatrixMode(GL_PROJECTION); // устанавливает режим матрицы видового преобразования
+	gluPerspective(45., double(width()) / double(height()), 0.01, 20.0);//установить перспективное проецирование
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -41,14 +41,16 @@ void ExampleWindow::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
-	gluLookAt(
+	gluLookAt( //устанавливает параметры камеры: первая тройка - её координаты, вторая - вектор направления, третья - направление оси Y
 			5., 5., 5. * _eye_level,
 			0., 0., 0.,
 			0., 0., 1.);
 
-	glRotated(_angle, 0., 0., 1.);
+	glRotated(_angle, 0., 0., 1.); // вращение
 
-	glBegin(GL_QUADS);
+	glBegin(GL_QUADS);// сообщает видеосистеме, что будет происходить рисjвание
+
+	// задаем размеры и цвета куба
 
 	glNormal3d(  1.,  0.,  0.);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, s_material_red);
@@ -92,11 +94,13 @@ void ExampleWindow::render()
 	glVertex3d( -1., -1., -1.);
 	glVertex3d(  1., -1., -1.);
 
-	glEnd();
+	glEnd(); // конец отрисовки
 }
 
 void ExampleWindow::handle_logic()
 {
+
+	// расписаны амплитуды движения
 	_angle += 1.;
 	if (_angle >= 360.)
 		_angle -= 360.;
